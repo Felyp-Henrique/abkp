@@ -1,7 +1,7 @@
 import functools
 
 
-def required(func_validation):
+def required(func_validation: function) -> function:
     def decorator(func):
         @functools.wraps(func)
         def result(*args, **kwargs):
