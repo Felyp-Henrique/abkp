@@ -1,5 +1,5 @@
 import click
-import utils
+import syscalls
 import compressors
 import validators as vld
 
@@ -12,7 +12,7 @@ def abkp(): ...
 @click.argument("appname", type=str)
 @vld.required(vld.validate_adb_exists)
 def abkp_backup_backup(appname: str):
-    utils.adb.backup(appname)
+    syscalls.adb.backup(appname)
     with compressors.abopen('backup.ab') as ab:
         ab.to_tar('backup.tar')
 
@@ -21,4 +21,4 @@ def abkp_backup_backup(appname: str):
 @click.argument("filename", type=click.Path(exists=True))
 @vld.required(vld.validate_adb_exists)
 def abkp_backup_restore(filename: str):
-    utils.adb.restore(filename)
+    syscalls.adb.restore(filename)
